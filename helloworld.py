@@ -8,4 +8,6 @@ y = 50
 width = 40
 height = 60
 vel = 5
-
+run = True
+while run:
+    pygame.time.delay(100)
