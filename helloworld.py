@@ -1,6 +1,6 @@
 import pygame
 
-# 1 tutorial
+# 2 tutorial
 pygame.init()
 win = pygame.display.set_mode([600, 600])
 pygame.display.set_caption("My first game")
