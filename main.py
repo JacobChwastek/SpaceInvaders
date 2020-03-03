@@ -40,9 +40,13 @@ while run:
         shot = True
     if shot:
         missleY -= vel
-        pygame.draw.rect(win, (225, 0, 0), (missleX, missleY, 10, 10))
+        pygame.draw.rect(win, (225, 0, 0), (missleX + width / 2, missleY, 10, 10))
 
+    if missleY < 0:
+        shot = False
+        missleY = y
+    print(missleY)
 
-    #update 
+    # update
     pygame.display.update()
 pygame.quit()
