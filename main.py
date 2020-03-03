@@ -14,9 +14,12 @@ vel = 20
 run = True
 y = screenHeight - height
 x = int(screenWidth / 2)
-
+missleX = x
+missleY = y
+shot = False
 
 while run:
+
     pygame.time.delay(100)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -29,6 +32,17 @@ while run:
         x += vel
 
     win.fill((0, 0, 0))
-    pygame.draw.rect(win, (255, 0, 0), (x, y, width, height))
+
+    pygame.draw.rect(win, (0, 255, 0), (x, y, width, height))
+
+    # pocisk
+    if keys[pygame.K_SPACE]:
+        shot = True
+    if shot:
+        missleY -= vel
+        pygame.draw.rect(win, (225, 0, 0), (missleX, missleY, 10, 10))
+
+
+    #update 
     pygame.display.update()
 pygame.quit()
