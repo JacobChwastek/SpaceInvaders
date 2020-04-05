@@ -1,10 +1,10 @@
 import pygame
 
 
-class Player(pygame.sprite.Sprite):
+class Score(pygame.sprite.Sprite):
 
     def __init__(self, x, y, player_speed=None):
-        super(Player, self).__init__()
+        super(Score, self).__init__()
 
         self.x = x
         self.y = y

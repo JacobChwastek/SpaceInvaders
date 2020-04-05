@@ -1,12 +1,11 @@
-
 import random
+
 import pygame
 
 
 class Enemy(pygame.sprite.Sprite):
 
-    def __init__(self):
-
+    def __init__(self, SCREEN_WIDTH=None, SCREEN_HEIGHT=None):
         super(Enemy, self).__init__()
 
         self.surf = pygame.Surface((20, 10))
@@ -27,11 +26,8 @@ class Enemy(pygame.sprite.Sprite):
 
         self.speed = random.randint(5, 20)
 
-
     def update(self):
-
         self.rect.move_ip(-self.speed, 0)
 
         if self.rect.right < 0:
-
             self.kill()
