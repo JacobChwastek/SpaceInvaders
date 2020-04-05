@@ -7,7 +7,7 @@ from player import Player
 myPyGame = pygame.init()
 # create a screen
 win = pygame.display.set_mode([600, 600])
-icon = pygame.image.load("rocket.png")
+icon = pygame.image.load("img/rocket.png")
 pygame.display.set_icon(icon)
 
 pygame.display.set_caption("Space Invaders")
@@ -15,7 +15,7 @@ run = True
 
 # Player
 classPlayer = Player()
-playerImg = pygame.image.load("bullet.png")
+playerImg = pygame.image.load("img/bullet.png")
 playerX = 278
 playerY = 530
 playerX_change = 0
@@ -87,7 +87,6 @@ def fire_bullet(x, y):
 while run:
     win.fill((0, 0, 0))
     win.blit(background, (0, 0))
-
     win.blit(classPlayer.surf, (playerX, playerY))
 
     for event in pygame.event.get():
@@ -142,7 +141,6 @@ while run:
     if bullet_state == "fire":
         fire_bullet(bulletX, bulletY)
         bulletY -= bulletY_change
-    # player(playerX, playerY)
     showScore(textX, textY)
     pygame.display.update()
 
