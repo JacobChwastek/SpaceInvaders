@@ -5,29 +5,14 @@ import pygame
 
 class Enemy(pygame.sprite.Sprite):
 
-    def __init__(self, SCREEN_WIDTH=None, SCREEN_HEIGHT=None):
-        super(Enemy, self).__init__()
+    def __init__(self, x, y, x_change, y_change, is_destroyed):
+        pygame.sprite.Sprite.__init__(self)
+        self.surf = pygame.image.load('ufo.png')
+        self.x = x
+        self.y = y
+        self.x_change = x_change
+        self.y_change = y_change
+        self.is_destroyed = is_destroyed
 
-        self.surf = pygame.Surface((20, 10))
 
-        self.surf.fill((255, 255, 255))
 
-        self.rect = self.surf.get_rect(
-
-            center=(
-
-                random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
-
-                random.randint(0, SCREEN_HEIGHT),
-
-            )
-
-        )
-
-        self.speed = random.randint(5, 20)
-
-    def update(self):
-        self.rect.move_ip(-self.speed, 0)
-
-        if self.rect.right < 0:
-            self.kill()

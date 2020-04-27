@@ -3,6 +3,8 @@ import random
 import math
 from player import Player
 from bullet import Bullet
+from enemy import Enemy
+from enemyController import EnemyController
 
 # initialize the pygame
 myPyGame = pygame.init()
@@ -10,12 +12,15 @@ myPyGame = pygame.init()
 win = pygame.display.set_mode([600, 600])
 icon = pygame.image.load("img/rocket.png")
 pygame.display.set_icon(icon)
-
 pygame.display.set_caption("Space Invaders")
 run = True
 
+# Enemies
+num_of_enemies = 6
+enemy_list = EnemyController.generateNewEnemies(6)
+
 # Player
-player = Player(278, 530, 0)
+player = Player(278, 530, 0, win)
 
 # Bullet
 bullet = Bullet(0, 530, 'ready', 2)
@@ -28,37 +33,12 @@ textX = 10
 textY = 10
 
 # Background
-
 background = pygame.image.load("background.jpg")
-
-# Enemy
-
-isDestroyed = []
-enemyImg = []
-enemyX = []
-enemyY = []
-enemyX_change = []
-enemyY_change = []
-num_of_enemies = 6
-
-for i in range(num_of_enemies):
-    enemyImg.append(pygame.image.load("ufo.png"))
-    enemyX.append(random.randint(0, 550))
-    enemyY.append(random.randint(50, 150))
-    enemyX_change.append(0.5)
-    enemyY_change.append(20)
-    isDestroyed.append(False)
-    score = 0
 
 
 def showScore(x, y):
     score = font.render("Score: " + str(score_value), True, (255, 255, 255))
     win.blit(score, (x, y))
-
-
-def enemy(x, y, i):
-    if not isDestroyed[i]:
-        win.blit(enemyImg[i], (x, y))
 
 
 def isCollision(currentEnemyX, currentEnemyY, currentBulletX, currentBulletY):
@@ -77,7 +57,7 @@ def fire_bullet(x, y):
 while run:
     win.fill((0, 0, 0))
     win.blit(background, (0, 0))
-    win.blit(player.surf, (int(player.x), int(player.y)))
+    Player.showPlayer(player)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -105,23 +85,24 @@ while run:
     # enemies
 
     for i in range(num_of_enemies):
+        EnemyController.updateEnemyX(i)
 
-        enemyX[i] += enemyX_change[i]
-        if enemyX[i] <= 0:
-            enemyY[i] += enemyY_change[i]
-            enemyX_change[i] = 0.5
-        elif enemyX[i] >= 540:
-            enemyY[i] += enemyY_change[i]
-            enemyX_change[i] = -0.5
-        collision = isCollision(enemyX[i], enemyY[i], bullet.x, bullet.y)
+        if enemy_list[i].x <= 0:
+            EnemyController.updateEnemyY(i)
+            EnemyController.updateEnemyXChange(i, 0.5)
+        elif enemy_list[i].x >= 540:
+            EnemyController.updateEnemyY(i)
+            EnemyController.updateEnemyXChange(i, -0.5)
+
+        collision = isCollision(enemy_list[i].x, enemy_list[i].y, bullet.x, bullet.y)
         if collision:
             bullet.y = 530
             bullet.bullet_state = "ready"
             score_value += 1
-            isDestroyed[i] = True
-            enemyX[i] = 0
-            enemyY[i] = 0
-        enemy(enemyX[i], enemyY[i], i)
+            EnemyController.killEnemy(i)
+
+        enemy_list = EnemyController.refreshEnemyList()
+        EnemyController.displayEnemy(win,i)
 
     # bullet movement
     if bullet.y <= 0:
@@ -132,6 +113,7 @@ while run:
         fire_bullet(bullet.x, bullet.y)
         bullet.y -= bullet.bullet_speed
     showScore(textX, textY)
+
     pygame.display.update()
 
 pygame.quit()
