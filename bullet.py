@@ -14,3 +14,6 @@ class Bullet(pygame.sprite.Sprite):
         self.surf.set_colorkey((0, 0, 0), pygame.RLEACCEL)
         self.bullet_state = bullet_state
         self.rect = self.surf.get_rect()
+
+    def renderBullet(self):
+        self.win.blit(self.surf, (int(self.x), int(self.y)))
