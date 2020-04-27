@@ -1,5 +1,6 @@
 from enemy import Enemy
 import pygame
+import random
 
 
 class EnemyController(pygame.sprite.Sprite):
@@ -24,6 +25,7 @@ class EnemyController(pygame.sprite.Sprite):
     @staticmethod
     def updateEnemyY(i):
         EnemyController.enemy_list[i].y += EnemyController.enemy_list[i].y_change
+
     @staticmethod
     def refreshEnemyList():
         return EnemyController.enemy_list
@@ -34,7 +36,7 @@ class EnemyController(pygame.sprite.Sprite):
         enemy.is_destroyed = True
 
     @staticmethod
-    def displayEnemy(win,i):
+    def displayEnemy(win, i):
         enemy = EnemyController.enemy_list[i]
         if not enemy.is_destroyed:
             win.blit(enemy.surf, (enemy.x, enemy.y))
@@ -44,3 +46,10 @@ class EnemyController(pygame.sprite.Sprite):
         enemies = EnemyController.enemy_list
         aliveEnemies = [enemy for enemy in enemies if enemy.is_destroyed is False]
         return len(aliveEnemies)
+
+    @staticmethod
+    def isShooting():
+        x = random.randint(1, 1000)
+        if x == 1:
+            return True
+        return False

@@ -5,6 +5,8 @@ from player import Player
 from bullet import Bullet
 from enemy import Enemy
 from enemyController import EnemyController
+from bombController import BombController
+from bomb import Bomb
 
 # initialize the pygame
 myPyGame = pygame.init()
@@ -18,6 +20,7 @@ run = True
 # Enemies
 num_of_enemies = 6
 enemy_list = EnemyController.generateNewEnemies(6)
+bombController = BombController
 
 # Player
 player = Player(278, 530, 0, win)
@@ -86,6 +89,13 @@ while run:
 
     for i in range(num_of_enemies):
         EnemyController.updateEnemyX(i)
+        isShooting = EnemyController.isShooting()
+        if(isShooting):
+            bombController.createBomb(enemy_list[i].x, enemy_list[i].y,1)
+
+        if(bombController.isAlive(i)):
+            bombController.moveBomb(i)
+            BombController.displayBomb(win,i)
 
         if enemy_list[i].x <= 0:
             EnemyController.updateEnemyY(i)
@@ -102,7 +112,9 @@ while run:
             EnemyController.killEnemy(i)
 
         enemy_list = EnemyController.refreshEnemyList()
-        EnemyController.displayEnemy(win,i)
+        EnemyController.displayEnemy(win, i)
+
+
 
     # bullet movement
     if bullet.y <= 0:
