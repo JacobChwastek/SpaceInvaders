@@ -3,7 +3,7 @@ import pygame
 
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, x, y, player_speed=None,win = None):
+    def __init__(self, x, y, player_speed=None, win=None):
         super(Player, self).__init__()
 
         self.x = x
@@ -16,5 +16,3 @@ class Player(pygame.sprite.Sprite):
 
     def showPlayer(self):
         self.win.blit(self.surf, (int(self.x), int(self.y)))
-
-
