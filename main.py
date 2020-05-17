@@ -1,16 +1,11 @@
 import pygame
-import random
 import math
 from player import Player
 from bullet import Bullet
-from enemy import Enemy
 from enemyController import EnemyController
 from bombController import BombController
-from bomb import Bomb
 
-# initialize the pygame
 myPyGame = pygame.init()
-# create a screen
 win = pygame.display.set_mode([600, 600])
 icon = pygame.image.load("img/rocket.png")
 pygame.display.set_icon(icon)
@@ -90,12 +85,12 @@ while run:
     for i in range(num_of_enemies):
         EnemyController.updateEnemyX(i)
         isShooting = EnemyController.isShooting()
-        if(isShooting):
-            bombController.createBomb(enemy_list[i].x, enemy_list[i].y,1)
+        if isShooting:
+            bombController.createBomb(enemy_list[i].x, enemy_list[i].y, 1)
 
-        if(bombController.isAlive(i)):
+        if bombController.isAlive(i):
             bombController.moveBomb(i)
-            BombController.displayBomb(win,i)
+            BombController.displayBomb(win, i)
 
         if enemy_list[i].x <= 0:
             EnemyController.updateEnemyY(i)
@@ -105,6 +100,9 @@ while run:
             EnemyController.updateEnemyXChange(i, -0.5)
 
         collision = isCollision(enemy_list[i].x, enemy_list[i].y, bullet.x, bullet.y)
+        if bombController.isCollision(player.x, player.y, i):
+            run = False
+
         if collision:
             bullet.y = 530
             bullet.bullet_state = "ready"
@@ -113,8 +111,6 @@ while run:
 
         enemy_list = EnemyController.refreshEnemyList()
         EnemyController.displayEnemy(win, i)
-
-
 
     # bullet movement
     if bullet.y <= 0:
