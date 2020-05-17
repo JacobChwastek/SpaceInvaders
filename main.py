@@ -1,36 +1,31 @@
-import pygame
+from pygame import pygame
 from menu import Menu
-from button import *
 
 myPyGame = pygame.init()
-display_width = 600
-display_height = 600
+DISPLAY_WIDTH = 600
+DISPLAY_HEIGHT = 600
 
-win = pygame.display.set_mode([display_width, display_height])
+win = pygame.display.set_mode([DISPLAY_WIDTH, DISPLAY_HEIGHT])
 pygame.display.set_caption("Space Invaders")
 background = pygame.image.load("background.jpg")
-run = True
-game_state = "menu"
-menu = Menu(game_state, win)
+RUN = True
+menu = Menu("menu", win)
 
-
-
-
-while run:
+while RUN:
     win.fill((0, 0, 0))
     win.blit(background, (0, 0))
     mouse = pygame.mouse.get_pos()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            run = False
+            RUN = False
 
     if menu.game_state == 'menu':
         menu.display()
     elif menu.game_state == 'game':
         from game import *
     elif menu.game_state == 'exit':
-        run = False
+        RUN = False
 
     pygame.display.update()
 
