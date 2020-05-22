@@ -1,5 +1,3 @@
-opis_SpaceInvaders
-
 # Opis projektu z **Języków Symbolicznych**
 # Chwastek Jakub
 ## Opis zadania:
