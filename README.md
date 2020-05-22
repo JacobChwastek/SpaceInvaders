@@ -1,13 +1,7 @@
 opis_SpaceInvaders
 
 # Opis projektu z **Języków Symbolicznych**
-# Chwastek Jakub 130503
-
----
-Na piewszych zajęciach mojej grupy labolatoryjnej został przydzielony mi przez Pana dr inż. Marcina Ciurę projekt stworzenia gry **Space Invaders** wykorzystując biliotekę **Pygame**. Początkowo w projekcie nie wykorzystawałem narzędzi do kontroli wersji, cotygodniowo konsultując doimplementowane funkcjonalności z Panem Doktorem. Obecnie kod źrodłowy mojej apliakcji dostępny jest na platfomie github https://github.com/JacobChwastek/SpaceInvaders , dodatkowo 
-https://github.com/JacobChwastek/SpaceInvaders/projects/1 stworzona została przeze mnie struktura projektu do wydajniejszego i bardziej przejrzystego kontrolowania i planowania rozwoju aplikacji.
-
----
+# Chwastek Jakub
 ## Opis zadania:
 Stworzenie gry przypominającej popularną grę ** Space Invaders **
 przy wykorzystaniu bilioteki **Pygame**. Gra powinna zawierać:
