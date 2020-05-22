@@ -6,6 +6,13 @@ opis_SpaceInvaders
 Stworzenie gry przypominającej popularną grę ** Space Invaders **
 przy wykorzystaniu bilioteki **Pygame**. Gra powinna zawierać:
 
+![image](https://user-images.githubusercontent.com/42520499/82688874-ebc80c80-9c59-11ea-8612-ce5e1fc59ddb.png)
+
+![image](https://user-images.githubusercontent.com/42520499/82688906-f8e4fb80-9c59-11ea-9902-1661d231b086.png)
+
+![image](https://user-images.githubusercontent.com/42520499/82688923-fedadc80-9c59-11ea-84ab-fd72912b8ca6.png)
+
+
 1. **Definicje**
 	
 	- **gracz** - osoba uruchamiająca aplikacje, kontrolująca statek z pomocą strzałek i klawiasza spacja
