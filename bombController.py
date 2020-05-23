@@ -7,13 +7,16 @@ class BombController(pygame.sprite.Sprite):
     bomb_list = []
 
     @staticmethod
-    def createBomb(x, y, speed):
+    def create_bomb(x, y, speed):
         newBomb = Bomb(x, y, True, speed)
         BombController.bomb_list.append(newBomb)
 
     @staticmethod
     def moveBomb(i):
-        BombController.bomb_list[i].y += BombController.bomb_list[i].bomb_speed
+        if BombController.bomb_list[i].y > 600:
+            BombController.bomb_list.pop(i)
+        else:
+            BombController.bomb_list[i].y += BombController.bomb_list[i].bomb_speed
 
     @staticmethod
     def isAlive(i):
@@ -23,9 +26,10 @@ class BombController(pygame.sprite.Sprite):
 
     @staticmethod
     def displayBomb(win, i):
-        bomb = BombController.bomb_list[i]
-        if bomb.bomb_state:
-            win.blit(bomb.surf, (bomb.x, bomb.y))
+        if i < len(BombController.bomb_list):
+            bomb = BombController.bomb_list[i]
+            if bomb.bomb_state:
+                win.blit(bomb.surf, (bomb.x, bomb.y))
 
     @staticmethod
     def isCollision(playerX, playerY, i):
@@ -35,8 +39,6 @@ class BombController(pygame.sprite.Sprite):
             distanceY = math.fabs(bomb.y - playerY)
 
             if distanceX < 20 and distanceY < 33:
-                print(distanceY)
-                print(distanceX)
                 return True
 
         return False

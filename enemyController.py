@@ -7,15 +7,21 @@ class EnemyController(pygame.sprite.Sprite):
     enemy_list = []
 
     @staticmethod
-    def generateNewEnemies(num_of_enemies):
+    def generate_enemies(num_of_enemies):
+        EnemyController.enemy_list.clear()
+        y = 1
+        x = 0
         for i in range(num_of_enemies):
-            newEnemy = Enemy(i * 70, 100, 0.5, 40, False)
+            if x > 550:
+                x = 0
+                y += 0.5
+            newEnemy = Enemy(x, y * 100, 0.5, 40, False)
             EnemyController.enemy_list.append(newEnemy)
-
+            x += 70
         return EnemyController.enemy_list
 
     @staticmethod
-    def updateEnemyX(i):
+    def update_enemy_x(i):
         EnemyController.enemy_list[i].x += EnemyController.enemy_list[i].x_change
 
     @staticmethod
@@ -32,17 +38,19 @@ class EnemyController(pygame.sprite.Sprite):
 
     @staticmethod
     def killEnemy(i):
-        enemy = EnemyController.enemy_list[i]
-        enemy.is_destroyed = True
+        # enemy = EnemyController.enemy_list[i]
+        # enemy.is_destroyed = True
+        EnemyController.enemy_list.pop(i)
 
     @staticmethod
     def displayEnemy(win, i):
-        enemy = EnemyController.enemy_list[i]
-        if not enemy.is_destroyed:
+        if len(EnemyController.enemy_list) > i:
+            enemy = EnemyController.enemy_list[i]
             win.blit(enemy.surf, (enemy.x, enemy.y))
 
+
     @staticmethod
-    def countAliveEnemies():
+    def count_alive_enemies():
         enemies = EnemyController.enemy_list
         aliveEnemies = [enemy for enemy in enemies if enemy.is_destroyed is False]
         return len(aliveEnemies)

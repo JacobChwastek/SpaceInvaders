@@ -22,11 +22,13 @@ while RUN:
 
     if menu.game_state == 'menu':
         menu.display()
+        pygame.display.update()
     elif menu.game_state == 'game':
         from game import *
     elif menu.game_state == 'exit':
         RUN = False
+        pygame.display.update()
 
-    pygame.display.update()
+
 
 pygame.quit()
