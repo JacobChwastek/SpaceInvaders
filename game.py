@@ -4,8 +4,11 @@ from player import Player
 from bullet import Bullet
 from enemyController import EnemyController
 from bombController import BombController
+from level import Level
 
 myPyGame = pygame.init()
+
+gameLevel = Level()
 win = pygame.display.set_mode([600, 600])
 icon = pygame.image.load("img/rocket.png")
 pygame.display.set_icon(icon)
@@ -13,8 +16,7 @@ pygame.display.set_caption("Space Invaders")
 run = True
 
 # Enemies
-num_of_enemies = 6
-enemy_list = EnemyController.generateNewEnemies(6)
+enemy_list = EnemyController.generate_enemies(3)
 bombController = BombController
 
 # Player
@@ -30,16 +32,20 @@ font = pygame.font.Font('freesansbold.ttf', 32)
 textX = 10
 textY = 10
 
-# Background
 background = pygame.image.load("background.jpg")
 
 
-def showScore(x, y):
+def show_score(x, y):
     score = font.render("Score: " + str(score_value), True, (255, 255, 255))
     win.blit(score, (x, y))
 
 
-def isCollision(currentEnemyX, currentEnemyY, currentBulletX, currentBulletY):
+def show_level(x, y):
+    level = font.render("Level: " + str(gameLevel.level), True, (255, 255, 255))
+    win.blit(level, (x, y))
+
+
+def is_colliding(currentEnemyX, currentEnemyY, currentBulletX, currentBulletY):
     distance = math.sqrt((math.pow(currentEnemyX - currentBulletX, 2)) + (math.pow(currentEnemyY - currentBulletY, 2)))
     if distance < 27:
         return True
@@ -53,12 +59,15 @@ def fire_bullet(x, y):
 
 # game loop
 while run:
+
     win.fill((0, 0, 0))
     win.blit(background, (0, 0))
     Player.showPlayer(player)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            #Show score
+            # Redirect to menu
             run = False
 
         if event.type == pygame.KEYDOWN:
@@ -82,37 +91,37 @@ while run:
 
     # enemies
 
-    for i in range(num_of_enemies):
-        EnemyController.updateEnemyX(i)
+    for i, enemy in enumerate(enemy_list):
+
+        EnemyController.update_enemy_x(i)
         isShooting = EnemyController.isShooting()
         if isShooting:
-            bombController.createBomb(enemy_list[i].x, enemy_list[i].y, 1)
+            bombController.create_bomb(enemy.x, enemy.y, 1 + gameLevel.level * 0.25)
 
         if bombController.isAlive(i):
             bombController.moveBomb(i)
-            BombController.displayBomb(win, i)
+            bombController.displayBomb(win, i)
 
-        if enemy_list[i].x <= 0:
+        if enemy.x <= 0:
             EnemyController.updateEnemyY(i)
             EnemyController.updateEnemyXChange(i, 0.5)
-        elif enemy_list[i].x >= 540:
+        elif enemy.x >= 540:
             EnemyController.updateEnemyY(i)
             EnemyController.updateEnemyXChange(i, -0.5)
 
-        collision = isCollision(enemy_list[i].x, enemy_list[i].y, bullet.x, bullet.y)
+        collision = is_colliding(enemy.x, enemy.y, bullet.x, bullet.y)
         if bombController.isCollision(player.x, player.y, i):
             run = False
 
         if collision:
             bullet.y = 530
             bullet.bullet_state = "ready"
-            score_value += 1
+            score_value += 1 * gameLevel.level
             EnemyController.killEnemy(i)
 
         enemy_list = EnemyController.refreshEnemyList()
         EnemyController.displayEnemy(win, i)
 
-    # bullet movement
     if bullet.y <= 0:
         bullet.y = 530
         bullet.bullet_state = "ready"
@@ -120,7 +129,12 @@ while run:
     if bullet.bullet_state == "fire":
         fire_bullet(bullet.x, bullet.y)
         bullet.y -= bullet.bullet_speed
-    showScore(textX, textY)
+    show_score(textX, textY)
+    show_level(textX, textY + 40)
+
+    if EnemyController.count_alive_enemies() == 0:
+        gameLevel.level += 1
+        enemy_list = EnemyController.generate_enemies(3 + gameLevel.level)
 
     pygame.display.update()
 
