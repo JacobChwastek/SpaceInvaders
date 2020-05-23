@@ -13,5 +13,5 @@ class Bullet(pygame.sprite.Sprite):
         self.bullet_state = bullet_state
         self.rect = self.surf.get_rect()
 
-    def renderBullet(self):
+    def render_bullet(self):
         self.win.blit(self.surf, (int(self.x), int(self.y)))

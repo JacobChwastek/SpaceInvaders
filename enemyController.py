@@ -25,15 +25,15 @@ class EnemyController(pygame.sprite.Sprite):
         EnemyController.enemy_list[i].x += EnemyController.enemy_list[i].x_change
 
     @staticmethod
-    def updateEnemyXChange(i, value):
+    def update_enemy_x_change(i, value):
         EnemyController.enemy_list[i].x_change = value
 
     @staticmethod
-    def updateEnemyY(i):
+    def update_enemy_y(i):
         EnemyController.enemy_list[i].y += EnemyController.enemy_list[i].y_change
 
     @staticmethod
-    def refreshEnemyList():
+    def refresh_enemy_list():
         return EnemyController.enemy_list
 
     @staticmethod
@@ -56,7 +56,7 @@ class EnemyController(pygame.sprite.Sprite):
         return len(aliveEnemies)
 
     @staticmethod
-    def isShooting():
+    def is_shooting():
         x = random.randint(1, 1000)
         if x == 1:
             return True

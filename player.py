@@ -14,5 +14,5 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.surf.get_rect()
         self.win = win
 
-    def showPlayer(self):
+    def show_player(self):
         self.win.blit(self.surf, (int(self.x), int(self.y)))
