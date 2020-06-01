@@ -1,6 +1,7 @@
 import pygame
 from menu import Menu
 from game import game
+import images
 
 DISPLAY_WIDTH = 600
 DISPLAY_HEIGHT = 600
@@ -8,10 +9,14 @@ DISPLAY_HEIGHT = 600
 
 def main():
     pygame.init()
-    win = pygame.display.set_mode([DISPLAY_WIDTH, DISPLAY_HEIGHT])
     pygame.display.set_caption("Space Invaders")
-    background = pygame.image.load("background.jpg")
+    win = pygame.display.set_mode([DISPLAY_WIDTH, DISPLAY_HEIGHT])
+
+    images.Images.set_up()
+
+    background = pygame.image.load("img/background.jpg")
     run = True
+
     menu = Menu(win)
 
     while run:

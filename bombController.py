@@ -3,6 +3,7 @@ import math
 import pygame
 
 
+# todo refactor to normal class
 class BombController(pygame.sprite.Sprite):
     bomb_list = []
 

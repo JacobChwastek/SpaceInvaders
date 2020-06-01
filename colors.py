@@ -1,24 +1,8 @@
 class Color:
-    @staticmethod
-    def Black():
-        return 0, 0, 0
-
-    @staticmethod
-    def White():
-        return 255, 255, 255
-
-    @staticmethod
-    def Red():
-        return 255, 0, 0
-
-    @staticmethod
-    def Green():
-        return 0, 255, 0
-
-    @staticmethod
-    def Blue():
-        return 0, 0, 255
-
-    @staticmethod
-    def Gainsboro():
-        return 220, 220, 220
+    # pylint: disable=too-few-public-methods
+    BLACK = (0, 0, 0)
+    WHITE = (255, 255, 255)
+    RED = (255, 0, 0)
+    GREEN = (0, 255, 0)
+    BLUE = (0, 0, 255)
+    GAINSBORO = (220, 220, 220)

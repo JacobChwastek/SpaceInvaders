@@ -5,7 +5,7 @@ from bullet import Bullet
 from enemyController import EnemyController
 from bombController import BombController
 from level import Level
-
+from colors import Color
 
 def game():
 
@@ -32,14 +32,14 @@ def game():
     text_x = 10
     text_y = 10
 
-    background = pygame.image.load("background.jpg")
+    background = pygame.image.load("img/background.jpg")
 
     def show_score(x, y):
-        score = font.render("Score: {}".format(score_value), True, (255, 255, 255))
+        score = font.render("Score: {}".format(score_value), True, Color.WHITE)
         win.blit(score, (x, y))
 
     def show_level(x, y):
-        level = font.render("Level: {}".format(game_level.level), True, (255, 255, 255))
+        level = font.render("Level: {}".format(game_level.level), True, Color.WHITE)
         win.blit(level, (x, y))
 
     def is_colliding(current_enemy_x, current_enemy_y, current_bullet_x, current_bullet_y):
