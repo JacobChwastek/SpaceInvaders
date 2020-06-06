@@ -48,7 +48,6 @@ class EnemyController(pygame.sprite.Sprite):
             enemy = EnemyController.enemy_list[i]
             win.blit(enemy.surf, (enemy.x, enemy.y))
 
-
     @staticmethod
     def count_alive_enemies():
         enemies = EnemyController.enemy_list
