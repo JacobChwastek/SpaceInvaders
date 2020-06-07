@@ -1,62 +1,54 @@
 from enemy import Enemy
-import pygame
 import random
 
 
-class EnemyController(pygame.sprite.Sprite):
+class EnemyController:
+
     enemy_list = []
 
-    @staticmethod
-    def generate_enemies(num_of_enemies):
-        EnemyController.enemy_list.clear()
+    def __init__(self, screen_width):
+        self.screen_width = screen_width
+
+    def generate_enemies(self, num_of_enemies):
+        self.enemy_list.clear()
         y = 1
         x = 0
         for i in range(num_of_enemies):
-            if x > 550:
+            if x > self.screen_width:
                 x = 0
                 y += 0.5
             newEnemy = Enemy(x, y * 100, 0.5, 40, False)
-            EnemyController.enemy_list.append(newEnemy)
+            self.enemy_list.append(newEnemy)
             x += 70
-        return EnemyController.enemy_list
+        return self.enemy_list
 
-    @staticmethod
-    def update_enemy_x(i):
-        EnemyController.enemy_list[i].x += EnemyController.enemy_list[i].x_change
+    def update_enemy_x(self, i):
+        self.enemy_list[i].x += self.enemy_list[i].x_change
 
-    @staticmethod
-    def update_enemy_x_change(i, value):
-        EnemyController.enemy_list[i].x_change = value
+    def update_enemy_x_change(self, i, value):
+        self.enemy_list[i].x_change = value
 
-    @staticmethod
-    def update_enemy_y(i):
-        EnemyController.enemy_list[i].y += EnemyController.enemy_list[i].y_change
+    def update_enemy_y(self, i):
+        self.enemy_list[i].y += self.enemy_list[i].y_change
 
-    @staticmethod
-    def refresh_enemy_list():
-        return EnemyController.enemy_list
+    def refresh_enemy_list(self):
+        return self.enemy_list
 
-    @staticmethod
-    def killEnemy(i):
-        # enemy = EnemyController.enemy_list[i]
-        # enemy.is_destroyed = True
-        EnemyController.enemy_list.pop(i)
+    def killEnemy(self, i):
+        self.enemy_list.pop(i)
 
-    @staticmethod
-    def displayEnemy(win, i):
-        if len(EnemyController.enemy_list) > i:
-            enemy = EnemyController.enemy_list[i]
+    def displayEnemy(self, win, i):
+        if len(self.enemy_list) > i:
+            enemy = self.enemy_list[i]
             win.blit(enemy.surf, (enemy.x, enemy.y))
 
-    @staticmethod
-    def count_alive_enemies():
-        enemies = EnemyController.enemy_list
+    def count_alive_enemies(self):
+        enemies = self.enemy_list
         aliveEnemies = [enemy for enemy in enemies if enemy.is_destroyed is False]
         return len(aliveEnemies)
 
-    @staticmethod
-    def is_shooting():
-        x = random.randint(1, 1000)
+    def is_shooting(self, level):
+        x = random.randint(1, (1000 - level * 10))
         if x == 1:
             return True
         return False

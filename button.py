@@ -15,7 +15,5 @@ def button(msg, x, y, w, h, color, on_hover_color, win, action=None):
     else:
         pygame.draw.rect(win, color, (x, y, w, h))
 
-    # font = pygame.font.Font("freesansbold.ttf", 32)
-
     text_button = Images.FONT.render(msg, True, Color.BLACK)
     win.blit(text_button, (x + 50, y + 10))
