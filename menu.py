@@ -13,7 +13,7 @@ class Menu(pygame.sprite.Sprite):
     def display(self):
         button("START", 200, 100, 200, 50, Color.GAINSBORO, Color.GREEN, self.win, self.start_game)
         button("SCORE", 200, 200, 200, 50, Color.GAINSBORO, Color.GREEN, self.win, self.score_board)
-        button("EXIT", 200, 300, 200, 50, Color.GAINSBORO, Color.RED, self.win, self.exit)
+        button("EXIT", 200, 300, 200, 50, Color.GAINSBORO, Color.EXIT, self.win, self.exit)
 
     def start_game(self):
         self.game_state = "game"
