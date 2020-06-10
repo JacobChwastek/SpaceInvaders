@@ -3,6 +3,7 @@ import math
 import pygame
 
 
+# todo refactor to normal class
 class BombController(pygame.sprite.Sprite):
     bomb_list = []
 
@@ -12,27 +13,27 @@ class BombController(pygame.sprite.Sprite):
         BombController.bomb_list.append(newBomb)
 
     @staticmethod
-    def moveBomb(i):
+    def move_bomb(i):
         if BombController.bomb_list[i].y > 600:
             BombController.bomb_list.pop(i)
         else:
             BombController.bomb_list[i].y += BombController.bomb_list[i].bomb_speed
 
     @staticmethod
-    def isAlive(i):
+    def is_alive(i):
         if i >= len(BombController.bomb_list):
             return False
         return True
 
     @staticmethod
-    def displayBomb(win, i):
+    def display_bomb(win, i):
         if i < len(BombController.bomb_list):
             bomb = BombController.bomb_list[i]
             if bomb.bomb_state:
                 win.blit(bomb.surf, (bomb.x, bomb.y))
 
     @staticmethod
-    def isCollision(playerX, playerY, i):
+    def is_collision(playerX, playerY, i):
         if i < len(BombController.bomb_list):
             bomb = BombController.bomb_list[i]
             distanceX = math.fabs(bomb.x - playerX)

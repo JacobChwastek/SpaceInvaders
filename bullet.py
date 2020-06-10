@@ -1,4 +1,5 @@
 import pygame
+from images import Images
 
 
 class Bullet(pygame.sprite.Sprite):
@@ -8,10 +9,10 @@ class Bullet(pygame.sprite.Sprite):
         self.x = x
         self.y = y
         self.bullet_speed = bullet_speed
-        self.surf = pygame.image.load('img/bullet.png').convert()
+        self.surf = Images.BULLET
         self.surf.set_colorkey((0, 0, 0), pygame.RLEACCEL)
         self.bullet_state = bullet_state
         self.rect = self.surf.get_rect()
 
-    def renderBullet(self):
+    def render_bullet(self):
         self.win.blit(self.surf, (int(self.x), int(self.y)))

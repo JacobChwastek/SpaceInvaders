@@ -1,4 +1,5 @@
 import pygame
+from images import Images
 
 
 class Bomb(pygame.sprite.Sprite):
@@ -9,7 +10,7 @@ class Bomb(pygame.sprite.Sprite):
         self.x = x
         self.y = y
         self.bomb_speed = bomb_speed
-        self.surf = pygame.image.load('img/bomb.png')
+        self.surf = Images.BOMB
         self.surf.set_colorkey((0, 0, 0), pygame.RLEACCEL)
         self.bomb_state = bomb_state
         self.rect = self.surf.get_rect()
