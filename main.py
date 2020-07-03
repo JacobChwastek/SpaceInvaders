@@ -73,11 +73,11 @@ def game():
     background = background = Images.BACKGROUND
 
     def show_score(x, y):
-        score = font.render(f"Score: {score_value}", True, Color.WHITE)
+        score = font.render(f"Score: {score_value}", True, Color.SCORE)
         WIN.blit(score, (x, y))
 
     def show_level(x, y):
-        level = font.render(f"Level: {game_level.level}", True, Color.WHITE)
+        level = font.render(f"Level: {game_level.level}", True, Color.LEVEL)
         WIN.blit(level, (x, y))
 
     def is_colliding(current_enemy_x, current_enemy_y, current_bullet_x, current_bullet_y):
